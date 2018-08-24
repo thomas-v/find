@@ -13,8 +13,6 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-
-
 class SecurityController extends AbstractController
 {
     /**
@@ -48,8 +46,6 @@ class SecurityController extends AbstractController
                 'title' => 'test',
                 'success_registration' => true
             ]);
-            
-            //return $this->redirectToRoute('security_login', ['success_registration' => true]);
         }
         
         return $this->render('security/registration.html.twig', [
