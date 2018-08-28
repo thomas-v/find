@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
@@ -28,6 +29,7 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=5,minMessage="Le code postal contient 5 chiffres")
      */
     private $zip;
 

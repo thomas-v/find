@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sociétés{% endblock %}
+
+{% block body %}
+	
+	<h1>Liste des sociétés</h1>
+	
+	<table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Société</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">Code postal</th>
+          <th scope="col">Ville</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for company in companies %}
+      	<tr>
+      		<td>{{ company.name }}</td>
+      		<td>{{ company.address }}</td>
+      		<td>{{ company.zip }}</td>
+      		<td>{{ company.city }}</td>
+      		<td><a href="{{ path('company_edit', {'id' : company.id}) }}">Modifier</a></td>
+      		<td><a href="{{ path('company_remove', {'id' : company.id}) }}">Supprimer</a></td>
+      	</tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock %}
