@@ -27,27 +27,32 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Votre email doit être renseigné")
      * @Assert\Email(message="Votre email n'est pas au bon format")
      */
     private $email;
 
     /**
+     * @Assert\NotBlank(message="Votre nom d'utilisateur doit être renseigné")
      * @ORM\Column(type="string", length=255)
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Votre mot de passe doit être renseigné")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire au minimum 8 caracteres")
      */
     private $password;
     
     /**
+     * @Assert\NotBlank(message="La confirmation de votre mot de passe doit être renseignée")
      * @Assert\EqualTo(propertyPath="password", message="Le mot de passe confirme n'est pas identique")
      */
     private $confirm_password;
 
     /**
+     
      * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="user", orphanRemoval=true)
      */
     private $companies;
