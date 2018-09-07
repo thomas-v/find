@@ -2,6 +2,9 @@
 
 {% block title %}Liste des sociétés{% endblock %}
 
+{% block stylesheets %}
+{% endblock %}
+
 {% block body %}
 	
 	<h1>Liste des sociétés</h1>
@@ -30,5 +33,10 @@
       {% endfor %}
       </tbody>
     </table>
+    <br>
+    <a class="btn btn-success" role="button" href="{{ path('company_add') }}">Ajouter une entreprise</a>
 
+{% endblock %}
+
+{% block javascripts %}
 {% endblock %}

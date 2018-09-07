@@ -14,6 +14,8 @@
 {% endblock %}
 
 {% block body %}
+
+	<h1>Tableau de bord</h1>
 	
 	<section class="row">
 		<div class="col-xs-12 col-sm-4 col-md-4">
@@ -21,10 +23,10 @@
               <div class="card-header"><h5>Sociétés</h5></div>
               <div class="card-body">
               	<p class="card-text">Gérez ici les entreprises ayant retenues votre attention</p>
-              	<a id='connection_button' class="btn btn-info" role="button" href="{{ path('company_add') }}">Ajouter</a>
+              	<a class="btn btn-info" role="button" href="{{ path('company_add') }}">Ajouter</a>
               	<br>
               	<br>
-                <a id='connection_button' class="btn btn-info" role="button" href="{{ path('company_list') }}">Lister</a>
+                <a class="btn btn-info" role="button" href="{{ path('company_list') }}">Lister</a>
               </div>
             </div>
         </div>
@@ -35,8 +37,8 @@
         	<div class="card border-success mb-3" >
               <div class="card-header"><h5>Contacts</h5></div>
               <div class="card-body">
-                <h4 class="card-title">Light card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Gérez ici les contacts éventuels au sein des différentes sociétés attirants votre attention</p>
+                <a class="btn btn-info" role="button" href="{{ path('contact_add') }}">Ajouter</a>
               </div>
             </div>
         </div>

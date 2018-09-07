@@ -14,7 +14,7 @@
 		{% endif %}
 	</h1>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     	{{ form_row(form.name, {label : 'Nom', attr : {'placeholder' : 'Nom'}}) }}
     	{{ form_row(form.address, {label : 'Adresse', attr : {'placeholder' : 'Adresse'}}) }}
     	{{ form_row(form.zip, {label : 'Code Postal', attr : {'placeholder' : 'Code Postal'}}) }}

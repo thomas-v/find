@@ -19,22 +19,26 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom de l'entrprise doit être renseigné")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'adresse de l'entreprise doit être renseignée")
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=5,minMessage="Le code postal contient 5 chiffres")
+     * @Assert\NotBlank(message="Le code postal de l'entreprise doit être renseigné")
+     * @Assert\Regex("/^\d{5}$/", message="Le code postal n'est pas au bon format")
      */
     private $zip;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La ville doit être renseignée")
      */
     private $city;
 
