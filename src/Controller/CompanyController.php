@@ -15,8 +15,8 @@ use Doctrine\Common\Persistence\ObjectRepository;
 class CompanyController extends AbstractController
 {
     /**
-     * @Route("/societes/ajout", name="company_add")
-     * @Route("/societes/{id}/modification", name="company_edit")
+     * @Route("/societe/ajout", name="company_add")
+     * @Route("/societe/{id}/modification", name="company_edit")
      */
     public function manage(Company $company = null, Request $request, ObjectManager $manager, Security $security)
     {   
@@ -62,7 +62,7 @@ class CompanyController extends AbstractController
     }
     
     /**
-     * @Route("/societes/{id}/supprimer", name="company_remove")
+     * @Route("/societe/{id}/supprimer", name="company_remove")
      */
     public function remove(Company $company, ObjectManager $manager){
         
