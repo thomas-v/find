@@ -50,11 +50,11 @@ class CompanyController extends AbstractController
     /**
      * @Route("/societes/liste", name="company_list")
      */
-    public function list(){
+    public function list(Security $security){
         
         $repository = $this->getDoctrine()->getRepository(Company::class);
         
-        $companies = $repository->findBy([], ['name' => 'ASC']);
+        $companies = $repository->findBy(['user' => $security->getUser()], ['name' => 'ASC']);
         
         return $this->render('company/list.html.twig', [
             'companies' => $companies
