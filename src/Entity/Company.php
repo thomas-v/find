@@ -50,15 +50,7 @@ class Company
      */
     private $user;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Contact", mappedBy="company")
-     */
-    private $contact;
-
-    public function __construct()
-    {
-        $this->contact = new ArrayCollection();
-    }
+    
 
     public function getId(): ?int
     {
@@ -125,34 +117,5 @@ class Company
         return $this;
     }
 
-    /**
-     * @return Collection|Contact[]
-     */
-    public function getContact(): Collection
-    {
-        return $this->contact;
-    }
 
-    public function addContact(Contact $contact): self
-    {
-        if (!$this->contact->contains($contact)) {
-            $this->contact[] = $contact;
-            $contact->setCompany($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContact(Contact $contact): self
-    {
-        if ($this->contact->contains($contact)) {
-            $this->contact->removeElement($contact);
-            // set the owning side to null (unless already changed)
-            if ($contact->getCompany() === $this) {
-                $contact->setCompany(null);
-            }
-        }
-
-        return $this;
-    }
 }
