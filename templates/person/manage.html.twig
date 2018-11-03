@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un interlocuteur{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+	
+	<h1>
+		{% if editMode %}
+			Modifier l'interlocuteur
+		{% else %}
+			Ajouter un interlocuteur
+		{% endif %}
+	</h1>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    	{{ form_row(form.name, {label : 'Nom', attr : {'placeholder' : 'Nom'}}) }}
+    	{{ form_row(form.forname, {label : 'Prénom', attr : {'placeholder' : 'Prénom'}}) }}
+    	{{ form_row(form.gender, {label : 'Sexe'}) }}
+    	{{ form_row(form.job, {label : 'Poste', attr : {'placeholder' : 'Poste'}}) }}
+    	<button type="submit" class="btn btn-success">
+    		{% if editMode %}
+    			Modifier
+    		{% else %}
+    			Ajouter
+    		{% endif %}
+    	</button>
+    {{ form_end(form) }}
+{% endblock %}
+

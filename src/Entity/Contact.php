@@ -43,6 +43,11 @@ class Contact
      */
     private $company;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Person", inversedBy="contact")
+     */
+    private $person;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class Contact
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getPerson(): ?Person
+    {
+        return $this->person;
+    }
+
+    public function setPerson(?Person $person): self
+    {
+        $this->person = $person;
 
         return $this;
     }

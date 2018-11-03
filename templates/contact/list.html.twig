@@ -17,6 +17,9 @@
           <th>Type de contact</th>
           <th>Support</th>
           <th>Note</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +32,11 @@
       		<td>{{ contact.comments }}</td>
       		<td><a href="{{ path('contact_edit', {'id' : contact.id}) }}">Modifier</a></td>
       		<td><a href="{{ path('contact_remove', {'id' : contact.id}) }}">Supprimer</a></td>
+      		{% if contact.person.id is not defined %}
+                <td><a href="{{ path('person_add', {'contact_id' : contact.id}) }}">Ajouter un interlocuteur</a></td>
+            {% else %}
+            	
+            {% endif %}
       	</tr>
       {% endfor %}
       </tbody>
