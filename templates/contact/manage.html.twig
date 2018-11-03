@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'une société{% endblock %}
+{% block title %}Ajout d'un contact{% endblock %}
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
@@ -8,17 +8,18 @@
 	
 	<h1>
 		{% if editMode %}
-			Modifier la société
+			Modifier le contact
 		{% else %}
-			Ajouter une société
+			Ajouter un contact
 		{% endif %}
 	</h1>
 
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    	{{ form_row(form.name, {label : 'Nom', attr : {'placeholder' : 'Nom'}}) }}
-    	{{ form_row(form.address, {label : 'Adresse', attr : {'placeholder' : 'Adresse'}}) }}
-    	{{ form_row(form.zip, {label : 'Code Postal', attr : {'placeholder' : 'Code Postal'}}) }}
-    	{{ form_row(form.city, {label : 'Ville', attr : {'placeholder' : 'Ville'}}) }}
+    	{{ form_row(form.type, {label : 'Type de contact'}) }}
+    	{{ form_row(form.support, {label : 'Numéro de téléphone'}) }}
+    	{{ form_row(form.date, {label : 'Date', attr : {'class' : 'js-datepicker'}}) }}
+    	{{ form_row(form.comments, {label : 'Commentaires', attr : {'placeholder' : 'Commentaires'}}) }}
+    	{{ form_row(form.company, {label : 'Société'}) }}
     	<button type="submit" class="btn btn-success">
     		{% if editMode %}
     			Modifier
@@ -27,4 +28,38 @@
     		{% endif %}
     	</button>
     {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+	$( document ).ready(function() {
+		if($( "#contact_type" ).val() == 1){
+			$("label[for='contact_support']").text('Numéro de téléphone');
+		}
+		else if($( "#contact_type" ).val() == 2){
+			$("label[for='contact_support']").text('Adresse email');
+		}
+		else if($( "#contact_type" ).val() == 3){
+			$("label[for='contact_support']").text('Adresse Skype ou Messenger');
+		}
+		else if($( "#contact_type" ).val() == 4){
+			//adresse form
+		}
+	});
+	
+	$( "#contact_type" ).change(function() {
+		if($( "#contact_type" ).val() == 1){
+			$("label[for='contact_support']").text('Numéro de téléphone');
+		}
+		else if($( "#contact_type" ).val() == 2){
+			$("label[for='contact_support']").text('Adresse email');
+		}
+		else if($( "#contact_type" ).val() == 3){
+			$("label[for='contact_support']").text('Adresse Skype ou Messenger');
+		}
+		else if($( "#contact_type" ).val() == 4){
+			//adresse form
+		}
+	});
+	</script>
 {% endblock %}

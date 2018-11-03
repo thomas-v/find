@@ -29,14 +29,40 @@ class ContactController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             
+            $manager->persist($contact);
+            $manager->flush();
             
-            
-            return $this->redirectToRoute('company_list');
+            return $this->redirectToRoute('contact_list');
         }
         
         return $this->render('contact/manage.html.twig', [
             'form' => $form->createView(),
             'editMode' => $contact->getId() != null
         ]);
+    }
+    
+    /**
+     * @Route("/contact/liste", name="contact_list")
+     */
+    public function list(){
+        
+        $contacts = $this->getDoctrine()
+        ->getRepository(Contact::class)
+        ->getContactsByUser($this->getUser());
+        
+        return $this->render('contact/list.html.twig', [
+            'contacts' => $contacts
+        ]);
+    }
+    
+    /**
+     * @Route("/contact/{id}/supprimer", name="contact_remove")
+     */
+    public function remove(Contact $contact, ObjectManager $manager){
+        
+        $manager->remove($contact);
+        $manager->flush();
+        
+        return $this->redirectToRoute('contact_list');
     }
 }

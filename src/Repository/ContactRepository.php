@@ -18,6 +18,18 @@ class ContactRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Contact::class);
     }
+    
+    public function getContactsByUser($user_id){
+        
+        $qb = $this->createQueryBuilder('c')
+                    ->innerJoin('c.company', 'p')
+                    ->innerJoin('p.user', 'u')
+                    ->innerJoin('c.type', 't')
+                    ->andWhere('u.id = :user_id')
+                    ->setParameter('user_id', $user_id)
+                    ->getQuery();
+        return $qb->execute();
+    }
 
 //    /**
 //     * @return Contact[] Returns an array of Contact objects

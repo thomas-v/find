@@ -32,10 +32,16 @@ class Contact
     private $comments;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\typeContact", inversedBy="contacts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeContact", inversedBy="contacts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="contacts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $company;
 
     public function getId(): ?int
     {
@@ -86,6 +92,18 @@ class Contact
     public function setType(?typeContact $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
