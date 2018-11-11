@@ -7,11 +7,7 @@
 {% block body %}
 	
 	<h1>
-		{% if editMode %}
-			Modifier l'interlocuteur
-		{% else %}
-			Ajouter un interlocuteur
-		{% endif %}
+		Ajouter un interlocuteur
 	</h1>
 
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
@@ -20,12 +16,7 @@
     	{{ form_row(form.gender, {label : 'Sexe'}) }}
     	{{ form_row(form.job, {label : 'Poste', attr : {'placeholder' : 'Poste'}}) }}
     	<button type="submit" class="btn btn-success">
-    		{% if editMode %}
-    			Modifier
-    		{% else %}
-    			Ajouter
-    		{% endif %}
+    		Ajouter
     	</button>
     {{ form_end(form) }}
 {% endblock %}
-

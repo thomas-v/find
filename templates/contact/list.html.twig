@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block body %}
+
 	
 	<h1>Liste des contacts</h1>
 	
@@ -17,6 +18,7 @@
           <th>Type de contact</th>
           <th>Support</th>
           <th>Note</th>
+          <th>Interlocuteur</th>
           <th></th>
           <th></th>
           <th></th>
@@ -30,13 +32,13 @@
       		<td>{{ contact.type.name }}</td>
       		<td>{{ contact.support }}</td>
       		<td>{{ contact.comments }}</td>
+      		{% if contact.person.id is defined %}
+      			<td><a href="{{ path('person_show', {'id' : contact.person.id}) }}">{{ contact.person.name }}</a></td>
+      		{% else %}
+      			<td><a href="{{ path('person_add', {'contact_id' : contact.id}) }}">Ajouter</a></td>
+      		{% endif %}
       		<td><a href="{{ path('contact_edit', {'id' : contact.id}) }}">Modifier</a></td>
       		<td><a href="{{ path('contact_remove', {'id' : contact.id}) }}">Supprimer</a></td>
-      		{% if contact.person.id is not defined %}
-                <td><a href="{{ path('person_add', {'contact_id' : contact.id}) }}">Ajouter un interlocuteur</a></td>
-            {% else %}
-            	
-            {% endif %}
       	</tr>
       {% endfor %}
       </tbody>

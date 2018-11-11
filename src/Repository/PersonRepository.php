@@ -18,6 +18,25 @@ class PersonRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Person::class);
     }
+    
+    public function getPersonsByUser($user_id): array{
+        
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "
+                    SELECT p.id, p.name, p.forname, p.gender, p.job
+                    FROM person p, contact c, company comp, user u
+                         WHERE c.person_id = p.id
+                         AND comp.id = c.company_id
+                         AND u.id = comp.user_id
+                         AND comp.user_id = $user_id
+        ";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+    }
 
 //    /**
 //     * @return Person[] Returns an array of Person objects

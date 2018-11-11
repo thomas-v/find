@@ -13,38 +13,67 @@ use Doctrine\Common\Persistence\ObjectManager;
 class PersonController extends AbstractController
 {
     /**
-     * @Route("/interlocuteur/ajout/{contact_id}", name="person_add")
+     * @Route("/interlocuteur/{id}/visualiser", name="person_show")
      */
-    public function add($contact_id = null, Request $request, ObjectManager $manager)
-    {
-        if($contact_id != null){
-            $contact = $this->getDoctrine()
-            ->getRepository(Contact::class)
-            ->find($contact_id);
-        }
+    public function show(Person $person){
         
-        $person = new Person();
+        $person = $this->getDoctrine()->getRepository(Person::class)->findOneBy(['id' => $person->getId()]);
+        
+        
+        return $this->render('person/show.html.twig', [
+            'person' => $person
+        ]);
+    }
+    
+    /**
+     * @Route("/interlocuteur/{contact_id}/ajout", name="person_add")
+     */
+    public function add(Contact $contact = null, Request $request, ObjectManager $manager)
+    {
+       
+       $person = new Person();
         
         $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
             
+            $contact->setPerson($person);
+            $manager->persist($contact);
             $manager->persist($person);
-            
-            if($contact){
-                $contact->setPerson($person);
-                $manager->persist($contact);
-            }
-            
             $manager->flush();
             
-            return $this->redirectToRoute('contact_list');
+            return $this->redirectToRoute('person_show', ['id' => $person->getId()]);
         }
         
-        return $this->render('person/manage.html.twig', [
-            'form' => $form->createView(),
-            'editMode' => null
+        return $this->render('person/add.html.twig', [
+            'form' => $form->createView()
         ]);
+    }
+    
+    /**
+     * @Route("/interlocuteur/liste", name="person_list")
+     */
+    public function list(){
+        
+        $persons = $this->getDoctrine()
+        ->getRepository(Person::class)
+        ->getPersonsByUser($this->getUser()->getId());
+        
+        
+        return $this->render('person/list.html.twig', [
+            'persons' => $persons
+        ]);
+    }
+    
+    /**
+     * @Route("/interlocuteur/{id}/supprimer", name="person_remove")
+     */
+    public function remove(Person $person, ObjectManager $manager){
+        
+        $manager->remove($person);
+        $manager->flush();
+        
+        return $this->redirectToRoute('person_list');
     }
 }
