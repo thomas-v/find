@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'une adresse{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+	
+	<h1>
+		Ajouter une adresse
+	</h1>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    	{{ form_row(form.address, {label : 'Adresse', attr : {'placeholder' : 'Adresse'}}) }}
+    	{{ form_row(form.zip, {label : 'Code postal', attr : {'placeholder' : 'Code postal'}}) }}
+    	{{ form_row(form.city, {label : 'Ville', attr : {'placeholder' : 'Ville'}}) }}
+    	<button type="submit" class="btn btn-success">
+    		Ajouter
+    	</button>
+    {{ form_end(form) }}
+{% endblock %}

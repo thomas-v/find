@@ -18,6 +18,17 @@ class AddressRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Address::class);
     }
+    
+    public function deleteAddress($contact_id){
+        
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "
+                    DELETE FROM Address WHERE contact_id = $contact_id
+        ";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    }
 
 //    /**
 //     * @return Address[] Returns an array of Address objects

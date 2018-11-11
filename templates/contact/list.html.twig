@@ -29,7 +29,14 @@
       	<tr>
       		<td>{{ contact.date|date("d-m-Y") }}</td>
       		<td>{{ contact.company.name }}</td>
-      		<td>{{ contact.type.name }}</td>
+      		<td>
+      		    {{ contact.type.name }}
+      		    	{% if contact.type.name == 'Entretient' %}
+              		    <a href="{{ path('address_add', {'id' : contact.id}) }}">
+                          <span class="badge badge-primary badge-pill">+</span>
+                        </a>
+                    {% endif %}
+      		</td>
       		<td>{{ contact.support }}</td>
       		<td>{{ contact.comments }}</td>
       		{% if contact.person.id is defined %}

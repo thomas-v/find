@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'une addresse{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+	
+	<h1>
+		Modifier une addresse
+	</h1>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    	{{ form_row(form.address, {label : 'Adresse', attr : {'placeholder' : 'Adresse'}}) }}
+    	{{ form_row(form.zip, {label : 'Code postal', attr : {'placeholder' : 'Code postal'}}) }}
+    	{{ form_row(form.city, {label : 'Ville', attr : {'placeholder' : 'Ville'}}) }}
+    	<button type="submit" class="btn btn-success">
+    		Modifier
+    	</button>
+    {{ form_end(form) }}
+    <br>
+    <a class="btn btn-danger" role="button" href="{{ path('address_remove', {'id' : address.id}) }}">Supprimer cette adresse</a>
+{% endblock %}
