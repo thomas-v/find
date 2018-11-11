@@ -26,7 +26,7 @@ class PersonController extends AbstractController
     }
     
     /**
-     * @Route("/interlocuteur/{contact_id}/ajout", name="person_add")
+     * @Route("/interlocuteur/{id}/ajout", name="person_add")
      */
     public function add(Contact $contact = null, Request $request, ObjectManager $manager)
     {
@@ -52,6 +52,29 @@ class PersonController extends AbstractController
     }
     
     /**
+     * @Route("/interlocuteur/{id}/modification", name="person_edit")
+     */
+    public function edit(Person $person, Request $request, ObjectManager $manager)
+    {
+        
+        $form = $this->createForm(PersonType::class, $person);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $manager->persist($person);
+            $manager->flush();
+            
+            return $this->redirectToRoute('person_show', ['id' => $person->getId()]);
+        }
+        
+        return $this->render('person/edit.html.twig', [
+            'form' => $form->createView(),
+            'person' => $person
+        ]);
+    }
+    
+    /**
      * @Route("/interlocuteur/liste", name="person_list")
      */
     public function list(){
@@ -71,9 +94,12 @@ class PersonController extends AbstractController
      */
     public function remove(Person $person, ObjectManager $manager){
         
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->findOneBy(['person' => $person->getId()]);
+        
+        $person->removeContact($contact);
         $manager->remove($person);
         $manager->flush();
         
-        return $this->redirectToRoute('person_list');
+        return $this->redirectToRoute('contact_list');
     }
 }

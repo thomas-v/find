@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un interlocuteur{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+	
+	<h1>
+		Modifier un interlocuteur
+	</h1>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    	{{ form_row(form.name, {label : 'Nom', attr : {'placeholder' : 'Nom'}}) }}
+    	{{ form_row(form.forname, {label : 'Prénom', attr : {'placeholder' : 'Prénom'}}) }}
+    	{{ form_row(form.gender, {label : 'Sexe'}) }}
+    	{{ form_row(form.job, {label : 'Poste', attr : {'placeholder' : 'Poste'}}) }}
+    	<button type="submit" class="btn btn-success">
+    		Modifier
+    	</button>
+    {{ form_end(form) }}
+    <br>
+    <a class="btn btn-danger" role="button" href="{{ path('person_remove', {'id' : person.id}) }}">Supprimer cet interlocuteur</a>
+{% endblock %}

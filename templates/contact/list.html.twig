@@ -35,7 +35,7 @@
       		{% if contact.person.id is defined %}
       			<td><a href="{{ path('person_show', {'id' : contact.person.id}) }}">{{ contact.person.name }}</a></td>
       		{% else %}
-      			<td><a href="{{ path('person_add', {'contact_id' : contact.id}) }}">Ajouter</a></td>
+      			<td><a href="{{ path('person_add', {'id' : contact.id}) }}">Ajouter</a></td>
       		{% endif %}
       		<td><a href="{{ path('contact_edit', {'id' : contact.id}) }}">Modifier</a></td>
       		<td><a href="{{ path('contact_remove', {'id' : contact.id}) }}">Supprimer</a></td>
