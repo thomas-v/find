@@ -48,6 +48,11 @@ class Contact
      */
     private $person;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", mappedBy="contact", cascade={"persist", "remove"})
+     */
+    private $address;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +126,23 @@ class Contact
     public function setPerson(?Person $person): self
     {
         $this->person = $person;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        $this->address = $address;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $address->getContact()) {
+            $address->setContact($this);
+        }
 
         return $this;
     }
