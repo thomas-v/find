@@ -29,6 +29,10 @@ class ContactController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             
+            if(empty($contact->getDate())){
+                $contact->setDate(new \DateTime());
+            }
+            
             $manager->persist($contact);
             $manager->flush();
             

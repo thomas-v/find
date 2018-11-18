@@ -26,6 +26,10 @@ class TypeContactFixtures extends Fixture
         $type->setName('Entretient');
         $manager->persist($type);
         
+        $type = new TypeContact();
+        $type->setName('Courrier');
+        $manager->persist($type);
+        
         $manager->flush();
         
     }

@@ -14,7 +14,7 @@
 		{% endif %}
 	</h1>
 
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_start(form) }}
     	{{ form_row(form.type, {label : 'Type de contact'}) }}
     	{{ form_row(form.support, {label : 'Numéro de téléphone'}) }}
     	{{ form_row(form.date, {label : 'Date', attr : {'class' : 'js-datepicker'}}) }}

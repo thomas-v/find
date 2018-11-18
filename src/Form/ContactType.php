@@ -6,6 +6,7 @@ use App\Entity\Contact;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
@@ -28,8 +29,9 @@ class ContactType extends AbstractType
         
         $builder
             ->add('support', TextType::class)
-            ->add('date', DateType::class, array(
-                'widget' => 'single_text',
+            ->add('date', DateTimeType::class, array(
+                'date_widget' => 'single_text', 
+                'time_widget' => 'single_text'
             ))
             ->add('comments')
             ->add('type', EntityType::class, array(
