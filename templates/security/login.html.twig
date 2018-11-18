@@ -14,7 +14,7 @@
 			<span class="form-error-icon badge badge-danger text-uppercase">Error</span>
 			<span class="form-error-message">
 	            {%  if error.messageKey|trans(error.messageData, 'security') == 'Invalid credentials.' %}
-	            	Pseudo ou mot de passe invalide
+	            	Email ou mot de passe invalide
 	            {% endif %}
 	        </span>
 	    </span>
@@ -23,8 +23,8 @@
 
 <form action="{{ path('security_login') }}" method="post">
 	<div class="form-group">
-		<label for="username">Pseudo</label>
-		<input id="username" placeholder="Pseudo" type="text" required name="_username" class="form-control" value="{{ username }}">
+		<label for="username">Email</label>
+		<input id="username" placeholder="Email" type="text" required name="_username" class="form-control" value="{{ email }}">
 	</div>
 	<div class="form-group">
 		<label for="password">Mot de passe</label>
